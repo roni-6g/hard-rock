@@ -9,6 +9,7 @@ function searchSongs() {
 
 const songsResult = (songs) => {
     const songResultDiv = document.getElementById('songs-result');
+    document.getElementById('full-lyric').innerText = ''
     songResultDiv.innerHTML = '';
     songs.forEach(song => {
         // console.log(song.title);
@@ -22,12 +23,23 @@ const songsResult = (songs) => {
                 </audio>
             </div>
             <div class="col-md-3 text-md-right text-center">
-                <button class="btn btn-success">Get Lyrics</button>
+                <button onclick="getLyrics('${song.artist.name}','${song.title}')" class="btn btn-success">Get Lyrics</button>
             </div>
         `;
         songDiv.innerHTML = songInfo;
         songResultDiv.appendChild(songDiv);
-       
 
     });
+}
+
+const getLyrics = (artist,title) => {
+    const lyricsUrl = `https://api.lyrics.ovh/v1/${artist}/${title}`;
+    fetch(lyricsUrl)
+    .then(res => res.json())
+    .then(data => displayLyric(data.lyrics));
+}
+
+const displayLyric = lyric => {
+    const lyricsDiv = document.getElementById('full-lyric');
+    lyricsDiv.innerText = lyric;
 }
