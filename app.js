@@ -19,7 +19,7 @@ const songsResult = (songs) => {
             <div class="col-md-9">
                 <h3 class="lyrics-name">${song.title}</h3>
                 <p class="author lead">Album by <span>${song.artist.name}</span></p>
-                <audio src="${song.preview}" controls>           
+                <audio src="${song.preview}" preload="auto" controls>           
                 </audio>
             </div>
             <div class="col-md-3 text-md-right text-center">
